@@ -19,7 +19,7 @@ router.post("/shorten", async (req, res) => {
     try {
       let url = await Url.findOne({ longUrl: longUrl });
       if (url) {
-        res.json(url);
+        res.redirect("/");
       } else {
         const shortUrl = baseUrl + "/" + urlCode;
         url = new Url({
@@ -30,7 +30,7 @@ router.post("/shorten", async (req, res) => {
         });
 
         await url.save();
-        res.json(url);
+        res.redirect("/");
       }
     } catch (error) {
       return res.status(500).json("Server Error");

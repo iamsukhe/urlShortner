@@ -6,8 +6,11 @@ const http = require("http").createServer(app);
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 
 connectDB();
+
+app.set("view engine", "ejs");
 
 app.use("/", require("./routes/index"));
 app.use("/api/url", require("./routes/url"));
